@@ -1,0 +1,36 @@
+// N 叉树前序遍历 递归法求解
+class Solution {
+    public List<Integer> preorder(Node root) {
+        List<Integer> ans = new ArrayList<Integer>();
+        preorders(ans, root);
+        return ans;
+    }
+
+    public void preorders(List<Integer> ans, Node root) {
+        if (root == null) {
+            return;
+        }
+        ans.add(root.val);
+        for (Node node : root.children) {
+            preorders(ans, node);
+        }
+    }
+}
+
+// 迭代法进行求解, 利用栈进行求解，每次压栈
+class Solution {
+    public List<Integer> preorder(Node root) {
+        List<Integer> ans = new ArrayList<>();
+        Stack<Node> stack = new Stack<Node>();
+        stack.push(root);
+        while (!stack.isEmpty()) {
+            Node node = stack.pop();
+            ans.add(node.val);
+            Collections.reverse(node.children);
+            for (Node md : node.children) {
+                stack.push(md);
+            }
+        }
+        return ans;
+    }
+}
